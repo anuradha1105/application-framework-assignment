@@ -1,0 +1,22 @@
+<div class="wrap">
+  <h1>Mini Chat (Angular + Spring)</h1>
+
+  <div class="row">
+    <label>Nickname</label>
+    <input [(ngModel)]="user" />
+  </div>
+
+  <div class="chatbox">
+    <div class="msg" *ngFor="let m of messages">
+      <div class="meta"><b>{{m.user}}</b> <span>{{ m.ts | date:'shortTime' }}</span></div>
+      <div>{{m.text}}</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <input [(ngModel)]="text" placeholder="Type a message…" (keyup.enter)="send()"/>
+    <button (click)="send()">Send</button>
+  </div>
+
+  <small>Open two tabs to test real-time.</small>
+</div>
