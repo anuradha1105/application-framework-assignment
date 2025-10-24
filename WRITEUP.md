@@ -72,9 +72,32 @@ Spring naturally enforces MVC. The backend acts as a message broker, separating 
 
 ---
 
+### **Version 3: Vue 3 + NestJS (Socket.IO)**
+
+| Layer | Component | Description |
+|--------|------------|-------------|
+| **Model (M)** | `ChatMessage` interface (server & client) | Simple message schema `{ user, text, ts }` shared across stack |
+| **View (V)** | Vue 3 component (`App.vue`) | Template + Composition API renders messages and input UI |
+| **Controller (C)** | NestJS `ChatGateway` (`chat.gateway.ts`) | `@WebSocketGateway()` and `@SubscribeMessage('message')` to handle and broadcast messages |
+
+**Why this structure?**  
+NestJS provides a modular, decorator-driven server with clear separation of concerns. Socket.IO keeps the real-time layer simple and compatible with the client. This combination gives a TypeScript-first, structured Node.js stack.
+
+### Strengths
+- TypeScript across frontend & backend for consistency
+- NestJS modularity and testable providers
+- Fast frontend dev with Vite + Vue 3
+
+### Weaknesses
+- More boilerplate than minimal Node servers
+- Requires learning Nest conventions
+- TypeScript setup needed to get full benefit
+
+---
+
 ## Reflection  
 
-Building the same application twice revealed that **frameworks define how developers think**:
+Building the same application multiple times revealed that **frameworks define how developers think**:
 - React + Node.js emphasizes **speed and simplicity** — “get it working fast.”
 - Angular + Spring emphasizes **structure and scalability** — “make it enterprise-ready.”
 
