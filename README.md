@@ -41,12 +41,12 @@ chat-project
 
 ## Requirements Recap
 
-✅ Browser-based chat UI  
-✅ Messages instantly reflected across sessions  
-✅ Two different framework stacks  
-✅ Functioning code in GitHub  
-✅ Clear run instructions (local/cloud)  
-✅ One-page reflection on frameworks and MVC mapping  
+- Browser-based chat UI  
+- Messages instantly reflected across sessions  
+- Two different framework stacks  
+- Functioning code in GitHub  
+- Clear run instructions (local/cloud)  
+- One-page reflection on frameworks and MVC mapping  
 
 ---
 
