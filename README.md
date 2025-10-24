@@ -17,6 +17,7 @@ Each version allows multiple browser sessions to send and receive messages in re
 |----------|-----------|----------|----------------|------|--------------|
 | **1** | React | Node.js (Express + Socket.IO) | Socket.IO | 3000 (backend) / 5173 (frontend) | Lightweight, JavaScript-only, fast to prototype |
 | **2** | Angular | Spring Boot (STOMP + SockJS) | STOMP over WebSocket | 8081 (backend) / 4200 (frontend) | Enterprise-style, strongly typed, message broker-based |
+| **3** | Vue 3 | NestJS | Socket.IO | 3000 (backend) / 5173 (frontend) | Modern TypeScript-based, modular architecture with decorators |
 
 ---
 
@@ -32,6 +33,10 @@ chat-project
 ├── chat-angular-spring/
 │   ├── server/         # Spring Boot backend
 │   └── client-app/     # Angular frontend
+│
+├── chat-vue-nest/
+│   ├── server/         # NestJS + Socket.IO backend
+│   └── client/         # Vue 3 + Vite frontend
 │
 ├── README.md           # Main documentation (this file)
 └── WRITEUP.md          # One-page report comparing frameworks and MVC mapping
@@ -244,13 +249,83 @@ Local: http://localhost:4200/
 
 ---
 
+# VERSION 3: Vue 3 + NestJS + Socket.IO
+
+### Overview
+This version combines Vue 3's Composition API with NestJS's decorator-based architecture.
+It uses Socket.IO for real-time communication, similar to Version 1, but with a more structured backend.
+
+---
+
+### How to Run
+
+#### **Terminal 1 – Start NestJS Backend**
+```bash
+cd "chat-vue-nest/server"
+npm install
+npm run start:dev
+```
+- Server starts on `http://localhost:3000`
+- Console shows: "Nest application successfully started"
+
+#### **Terminal 2 – Start Vue Frontend**
+```bash
+cd "chat-vue-nest/client"
+npm install
+npm run dev
+```
+- Open the printed URL (typically `http://localhost:5173`)
+
+#### **Test**
+1. Open two tabs at the Vite URL (http://localhost:5173)
+2. Enter nickname and send messages to see real-time updates
+
+### Screenshot
+
+<img width="1024" alt="Vue + Nest Chat Interface" src="https://github.com/user-attachments/assets/f2fed5a7-65c9-4b44-97c8-c973989d-00f0" />
+
+---
+
+### Architecture
+
+**Model (M)** —  
+- Backend: `ChatMessage` interface in `chat.gateway.ts`
+- Frontend: Message type in Vue component
+
+**Controller (C)** —  
+- NestJS `ChatGateway` with decorators:
+  - `@WebSocketGateway()`
+  - `@SubscribeMessage('message')`
+
+**View (V)** —  
+- Vue 3 template with v-for loop and Composition API
+- Real-time UI updates via socket.io-client
+
+---
+
+### Strengths
+- TypeScript throughout the stack
+- NestJS decorators provide clear intent
+- Vue 3 Composition API for better code organization
+- Fast development with Vite
+- Enterprise patterns similar to Angular/Spring
+
+### Weaknesses
+- More complex than React version
+- Learning curve for decorators
+- Requires TypeScript configuration
+
+---
+
 # Key Takeaways
 
 - React/Node: minimal ceremony, instant feedback  
 - Angular/Spring: full enterprise pipeline (DTOs, controllers, brokers)  
+- Vue/Nest: modern TypeScript stack with decorators but lighter than Angular
 - Frameworks shape the way you think about apps:  
   - React feels event-driven & flexible  
   - Spring Boot feels structured & disciplined  
+  - NestJS brings Angular-like structure to Node.js
 
 ---
 
